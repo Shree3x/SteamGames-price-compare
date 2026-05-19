@@ -13,13 +13,14 @@ import games from "../testData/input_games.json"
 
     //loading userInput.json
     const userData = getUserData()
-
+    //used for GithubActions
+    const username = process.env.MY_USERNAME || userData.username
+    const password = process.env.MY_PASSWORD || userData.password
 
     await page.goto('https://store.steampowered.com/')
-
     await loginPage.signInButton.waitFor({state:"visible", timeout:5000 })
-    // await loginPage.login(userData.username, userData.password)
-    // await page.getByRole('button', { name: userData.username }).waitFor() //waiting to make sure user is logged in
+    await loginPage.login(username, password)
+    await page.getByRole('button', { name: userData.username }).waitFor()
 
 
     const allGamesWithPrices: Record<string, any[]> = {}; // flat object
@@ -41,8 +42,7 @@ import games from "../testData/input_games.json"
         //attached is only used for scraping the element if you want to click then visible should be used
         await gameDetailViewPage.gameVersionTitle.first().waitFor({ state: 'attached', timeout: 5000 })
         const versionWithPrices = await gameDetailViewPage.getAllVersionsWithPrices()
-
-        allGamesWithPrices[game.title] = versionWithPrices;
+        allGamesWithPrices[game.title] = versionWithPrices
     }
     
     console.log(JSON.stringify(allGamesWithPrices, null, 2))
@@ -53,5 +53,3 @@ import games from "../testData/input_games.json"
     console.log('Script completed successfully')
     await browser.close()
 })()
-
-//https://store.steampowered.com/wishlist/profiles/76561198821293267/?sort=discount
