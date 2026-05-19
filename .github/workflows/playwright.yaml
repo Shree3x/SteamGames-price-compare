@@ -50,10 +50,16 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
-        json=$(cat src/testData/low_price_hit.json | jq .)
+        # Read JSON file
+        json=$(jq -c . src/testData/low_price_hit.json)
+
+        # Create payload with safe escaping
+        payload=$(jq -n --arg content "```json\n$json\n```" '{content: $content}')
+
+        # Send to Discord
         curl -H "Content-Type: application/json" \
             -X POST \
-            -d "{\"content\": \"\`\`\`json\n$json\n\`\`\`\"}" \
+            -d "$payload" \
             $DISCORD_WEBHOOK_URL
 
     - uses: actions/upload-artifact@v4
