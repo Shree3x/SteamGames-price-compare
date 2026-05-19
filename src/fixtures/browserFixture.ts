@@ -1,4 +1,4 @@
-import { firefox, Browser, Page } from 'playwright'
+import { firefox, Browser, Page, chromium } from 'playwright'
 
 /**
  * @summary Launches a Chromium browser and creates a new page.
@@ -6,7 +6,7 @@ import { firefox, Browser, Page } from 'playwright'
  * @returns { browser, page } - reusable browser and page
  */ 
 export async function createBrowser(headless = true): Promise<{ browser: Browser; page: Page }> {
-    const browser = await firefox.launch({ headless })
+    const browser = await chromium.launch({ headless })
     const page = await browser.newPage()
     return { browser, page }
 }
