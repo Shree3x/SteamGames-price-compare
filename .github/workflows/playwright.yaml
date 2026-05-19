@@ -1,5 +1,7 @@
 name: Playwright Tests
 on:
+  schedule:
+  - cron: '0 10 * * 1'
   workflow_dispatch:
 jobs:
   test:
@@ -51,7 +53,7 @@ jobs:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
         # Pretty-print JSON from file
-        json=$(jq . src/testdata/low_price_hit.json)
+        json=$(jq . src/testData/low_price_hit.json)
 
         # Wrap in Discord code block
         payload=$(jq -n --arg content "```json\n$json\n```" '{content: $content}')
