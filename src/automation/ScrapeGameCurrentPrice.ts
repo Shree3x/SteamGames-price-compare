@@ -3,6 +3,8 @@ import { getUserData } from "../fixtures/dataFixture"
 import { createPageObjects } from "../fixtures/pageObejctFixute"
 import {saveJson} from "../utils/fileUtils"
 import games from "../testData/input_games.json"
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 (async function runSteamAutomationTool() {
@@ -12,15 +14,15 @@ import games from "../testData/input_games.json"
     const { loginPage, homePage, ageCheckPage, gameDetailViewPage } = createPageObjects(page)
 
     //loading userInput.json
-    const userData = getUserData()
+    // const userData = getUserData()
     //used for GithubActions
-    const username = process.env.MY_USERNAME || userData.username
-    const password = process.env.MY_PASSWORD || userData.password
+    const username = process.env.MY_USERNAME ??""
+    const password = process.env.MY_PASSWORD ??""
 
     await page.goto('https://store.steampowered.com/')
     await loginPage.signInButton.waitFor({state:"visible", timeout:5000 })
     await loginPage.login(username, password)
-    await page.getByRole('button', { name: userData.username }).waitFor()
+    await page.getByRole('button', { name: username }).waitFor();
 
 
     const allGamesWithPrices: Record<string, any[]> = {}; // flat object
