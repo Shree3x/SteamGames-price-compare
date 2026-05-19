@@ -47,22 +47,22 @@ jobs:
         path: src/testData/low_price_hit.json
         retention-days: 5
         
-    - name: Send Pretty JSON to Discord
-      if: success()
+    - name: Send JSON to Discord
+      if: success()  # Only runs if previous steps succeeded
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
-        # Pretty-print JSON from file
-        json=$(jq . src/testData/low_price_hit.json)
+        JSON_FILE="src/testData/low_price_hit.json"
 
-        # Wrap in Discord code block
-        payload=$(jq -n --arg content "```json\n$json\n```" '{content: $content}')
+        # Format JSON nicely for Discord
+        JSON_CONTENT=$(jq '.' "$JSON_FILE")
+        PAYLOAD=$(jq -n --arg content "```json\n$JSON_CONTENT\n```" '{content: $content}')
 
-        # Send to Discord
+        # Send to Discord webhook
         curl -H "Content-Type: application/json" \
-            -X POST \
-            -d "$payload" \
-            "$DISCORD_WEBHOOK_URL"
+              -X POST \
+              -d "$PAYLOAD" \
+              $DISCORD_WEBHOOK_URL
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
