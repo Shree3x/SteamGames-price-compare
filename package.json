@@ -1,0 +1,28 @@
+{
+  "name": "steamgames-price-compare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shree3x/SteamGames-price-compare.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Shree3x/SteamGames-price-compare/issues"
+  },
+  "homepage": "https://github.com/Shree3x/SteamGames-price-compare#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^25.9.0",
+    "dotenv": "^17.4.2",
+    "playwright": "^1.60.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}

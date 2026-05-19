@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",          // Replaces 'commonjs' for modern compatibility
+    "moduleResolution": "NodeNext", // Replaces 'node' to fix the deprecation error
+    
+    "types": ["node"],
+    "lib": ["esnext", "dom"],
+    
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strictPropertyInitialization": false,
+
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["**/*.ts"]
+}
