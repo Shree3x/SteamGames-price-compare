@@ -45,16 +45,16 @@ jobs:
         path: src/testData/low_price_hit.json
         retention-days: 5
         
-    - name: Send Low Hit Prices to Discord
+    - name: Send JSON to Discord
       if: success()
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
-        # Read JSON file as a single line (compact)
-        json=$(jq -c . src/testData/low_price_hit.json)
+        # Read the JSON file directly
+        json=$(cat testData/low_price_hit.json)
 
-        # Build payload safely
-        payload=$(jq -n --arg content "$json" '{content: $content}')
+        # Wrap in a Discord code block
+        payload="{\"content\": \"\`\`\`\n$json\n\`\`\`\"}"
 
         # Send to Discord
         curl -H "Content-Type: application/json" \
