@@ -24,14 +24,39 @@ jobs:
       env:
         MY_USERNAME: ${{ secrets.MY_USERNAME }}
         MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
+    
+    - name: Upload artifact after first script
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Scraped Data for Current game Price games_current_price.json
+        path: src/testData/games_current_price.json
+        retention-days: 5
         
     - name: Run next automation script if previous passed
       if: ${{ success() }}
       run: npx ts-node src/automation/ComparePrices.ts
       
+    - name: Upload artifact after Second script
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Low Hit Prices for Games
+        path: src/testData/low_price_hit.json
+        retention-days: 5
+        
+    - name: Send Low Hit Prices to Discord (pretty)
+      if: success()
+      run: |
+        json=$(cat src/testData/low_price_hit.json | jq .)
+        curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"\`\`\`json\n$json\n\`\`\`\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30
+        retention-days: 5
