@@ -48,20 +48,16 @@ jobs:
         retention-days: 5
         
     - name: Send JSON to Discord
-      if: success()  # Only runs if previous steps succeeded
+      if: success()
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
         JSON_FILE="src/testData/low_price_hit.json"
 
-        # Format JSON nicely for Discord
-        JSON_CONTENT=$(jq '.' "$JSON_FILE")
-        PAYLOAD=$(jq -n --arg content "```json\n$JSON_CONTENT\n```" '{content: $content}')
-
-        # Send to Discord webhook
+        # Send JSON as-is in a Discord code block
         curl -H "Content-Type: application/json" \
               -X POST \
-              -d "$PAYLOAD" \
+              -d "{\"content\": \"\`\`\`json\n$(cat $JSON_FILE)\n\`\`\`\"}" \
               $DISCORD_WEBHOOK_URL
 
     - uses: actions/upload-artifact@v4
