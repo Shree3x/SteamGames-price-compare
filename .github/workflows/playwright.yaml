@@ -54,10 +54,13 @@ jobs:
       run: |
         JSON_FILE="src/testData/low_price_hit.json"
 
-        # Send JSON as-is in a Discord code block
+        # Escape quotes and backslashes for Discord JSON payload
+        ESCAPED_JSON=$(sed 's/\\/\\\\/g; s/"/\\"/g' "$JSON_FILE")
+
+        # Send to Discord in a code block
         curl -H "Content-Type: application/json" \
               -X POST \
-              -d "{\"content\": \"\`\`\`json\n$(cat $JSON_FILE)\n\`\`\`\"}" \
+              -d "{\"content\": \"\`\`\`json\n$ESCAPED_JSON\n\`\`\`\"}" \
               $DISCORD_WEBHOOK_URL
 
     - uses: actions/upload-artifact@v4
