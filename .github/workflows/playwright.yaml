@@ -53,7 +53,7 @@ jobs:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
         # Read the JSON file directly
-        json=$(cat src/testdata/low_price_hit.json)
+        json=$(cat src/testData/low_price_hit.json)
 
         # Wrap in a Discord code block
         payload="{\"content\": \"\`\`\`\n$json\n\`\`\`\"}"
