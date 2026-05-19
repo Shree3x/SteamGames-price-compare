@@ -47,12 +47,14 @@ jobs:
         
     - name: Send Low Hit Prices to Discord (pretty)
       if: success()
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
         json=$(cat src/testData/low_price_hit.json | jq .)
         curl -H "Content-Type: application/json" \
             -X POST \
             -d "{\"content\": \"\`\`\`json\n$json\n\`\`\`\"}" \
-            ${{ secrets.DISCORD_WEBHOOK_URL }}
+            $DISCORD_WEBHOOK_URL
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
