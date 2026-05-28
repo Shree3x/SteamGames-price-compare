@@ -13,5 +13,5 @@ node_modules/
 
 # Runtime / generated input files
 userinput.json
-
-
+games_current_price.json
+low_price_hit.json

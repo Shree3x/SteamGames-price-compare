@@ -6,6 +6,7 @@
     
     "types": ["node"],
     "lib": ["esnext", "dom"],
+    "rootDir": ".",
     
     "noUnusedLocals": false,
     "noUnusedParameters": false,
