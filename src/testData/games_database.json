@@ -9,8 +9,8 @@
     "ELDEN RING Shadow of the Erdtree Deluxe Edition": 4149
   },
   "Hades": {
-    "Hades": 1100,
-    "Hades + Hades II BUNDLE": 3024
+    "Hades": 275,
+    "Hades + Hades II BUNDLE": 1556
   },
   "Stardew Valley": {
     "Stardew Valley": 239
@@ -49,5 +49,10 @@
   "Days Gone" : {
     "Days Gone" : 824,
     "Days Gone + Broken Road DLC Bundle" : 1199
+  },
+  "Door Kickers 2" : {
+    "Door Kickers 2" : 476,
+    "War On Doors Collection" : 180, 
+    "Doorkickers 2 & Operation: Harsh Doorstop" : 1327
   }
 }

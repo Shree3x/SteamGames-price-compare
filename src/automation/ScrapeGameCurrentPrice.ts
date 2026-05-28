@@ -48,7 +48,7 @@ dotenv.config();
         allGamesWithPrices[game.title] = versionWithPrices
     }
     
-    // console.log(JSON.stringify(allGamesWithPrices, null, 2))
+    console.log(JSON.stringify(allGamesWithPrices, null, 2))
 
     saveJson('./games_current_price.json', allGamesWithPrices)
     console.log('Game pricing saved successfully!')

@@ -21,7 +21,7 @@ jobs:
     # - name: Run Playwright tests
     #   run: npx playwright test
 
-    - name: Run individual Automation script
+    - name: Run ScrapeGameCurrentPrice
       run: npx ts-node --project tsconfig.node.json src/automation/ScrapeGameCurrentPrice.ts
       env:
         MY_USERNAME: ${{ secrets.MY_USERNAME }}
@@ -35,7 +35,7 @@ jobs:
         path: src/testData/games_current_price.json
         retention-days: 5
         
-    - name: Run next automation script if previous passed
+    - name: Run ComparePrices if Previous passed
       if: success()
       run: npx ts-node --project tsconfig.node.json src/automation/ComparePrices.ts
       
