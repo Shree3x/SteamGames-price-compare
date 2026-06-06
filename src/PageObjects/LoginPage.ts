@@ -12,14 +12,14 @@ export class LoginPage extends BasePage {
   }
 
   get username(): Locator {
-    return this.page.locator(
-      "//div[contains(text(),'Sign in')]/following-sibling::input"
+    return this.page.getByRole(
+      'textbox', { name: 'Sign in with account name'}
     )
   }
 
   get password(): Locator {
-    return this.page.locator(
-      "//div[contains(text(),'Password')]/following-sibling::input"
+    return this.page.getByRole(
+      'textbox', { name: 'Password' }
     )
   }
 
