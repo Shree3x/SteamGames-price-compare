@@ -12,15 +12,21 @@ export class HomePage extends BasePage {
     )
   }
 
-    get searchButton() : Locator {
+  get searchButton() : Locator {
     return this.page.getByLabel(
       "Search", {exact : true}
     )
   }
 
-getGameFromSearchSuggestions(gameName: string) {
-    return this.page.getByRole('link', { name: new RegExp(gameName, 'i') });
-}
+    get advanceSearchButton() : Locator {
+    return this.page.getByRole(
+      'link', { name: 'Advanced Search' }
+    )
+  }
+
+  getGameFromSearchSuggestions(gameName: string) {
+      return this.page.getByRole('link', { name: new RegExp(gameName, 'i') });
+  }
 
   // getGameFromSearchSuggestions(gameName:string){
   //   return this.page.locator
@@ -36,6 +42,7 @@ getGameFromSearchSuggestions(gameName: string) {
   }
     
   async clickGameFromSearchSuggestions(name: string): Promise<void> {
+    await this.advanceSearchButton.waitFor({state: 'visible'})
     await this.getGameFromSearchSuggestions(name).first().click()
   }
 
