@@ -18,11 +18,11 @@ export class HomePage extends BasePage {
     )
   }
 
-    get advanceSearchButton() : Locator {
-    return this.page.getByRole(
-      'link', { name: 'Advanced Search' }
-    )
-  }
+  //   get advanceSearchButton() : Locator {
+  //   return this.page.getByRole(
+  //     'link', { name: 'Advanced Search' }
+  //   )
+  // }
 
   getGameFromSearchSuggestions(gameName: string) {
       return this.page.getByRole('link', { name: new RegExp(gameName, 'i') });
@@ -42,7 +42,9 @@ export class HomePage extends BasePage {
   }
     
   async clickGameFromSearchSuggestions(name: string): Promise<void> {
-    await this.advanceSearchButton.waitFor({state: 'visible'})
+    // await this.advanceSearchButton.waitFor({state: 'visible'})
+    // await this.getGameFromSearchSuggestions(name).first().waitFor({state: 'visible'})
+    await this.page.waitForLoadState('networkidle')
     await this.getGameFromSearchSuggestions(name).first().click()
   }
 
