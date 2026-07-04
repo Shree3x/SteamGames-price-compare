@@ -10,7 +10,7 @@ dotenv.config();
 
 (async function runSteamAutomationTool() {
     
-    const { browser, page } = await createBrowser() // headless = default is true
+    const { browser, page } = await createBrowser(false) // headless = default is true
 
     const { loginPage, homePage, ageCheckPage, gameDetailViewPage } = createPageObjects(page)
 
