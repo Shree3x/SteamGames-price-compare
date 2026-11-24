@@ -25,7 +25,7 @@ export class HomePage extends BasePage {
   // }
 
   getGameFromSearchSuggestions(gameName: string) {
-      return this.page.getByRole('link', { name: new RegExp(gameName, 'i') });
+      return this.page.getByRole('button', { name: new RegExp(gameName, 'i') });
   }
 
   // getGameFromSearchSuggestions(gameName:string){

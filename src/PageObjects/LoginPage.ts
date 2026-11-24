@@ -32,6 +32,7 @@ export class LoginPage extends BasePage {
   // Actions
   async login(username: string, password: string): Promise<void> {
     await this.signInButton.click()
+    await this.page.waitForLoadState('networkidle');
     await this.username.fill(username)
     await this.password.fill(password)
     await this.submitButton.click()
