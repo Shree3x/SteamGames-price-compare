@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "scrape": "ts-node --project tsconfig.node.json src/automation/ScrapeGameCurrentPrice.ts",
-  "compare": "ts-node --project tsconfig.node.json src/automation/ComparePrices.ts",
-  "test": "playwright test"
-  }, 
+    "scrape": "ts-node --project tsconfig.node.json src/automation/ScrapeGameCurrentPrice.ts",
+    "compare": "ts-node --project tsconfig.node.json src/automation/ComparePrices.ts",
+    "test": "playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shree3x/SteamGames-price-compare.git"
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Shree3x/SteamGames-price-compare#readme",
   "devDependencies": {
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "^1.65.1",
     "@types/dotenv": "^6.1.1",
     "@types/node": "^25.9.0",
     "dotenv": "^17.4.2",
